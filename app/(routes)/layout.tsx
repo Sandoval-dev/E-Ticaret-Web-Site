@@ -4,14 +4,17 @@ import Footer from './_components/Footer';
 
 
 interface RoutesLayoutProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
-const RoutesLayout = ({children}:RoutesLayoutProps) => {
+const RoutesLayout = ({ children }: RoutesLayoutProps) => {
   return (
     <>
-    <Header/>
-    {children}
-    <Footer/>
+      <Header />
+      <div className='min-h-screen'>
+        {children}
+      </div>
+
+      <Footer />
     </>
   )
 }
