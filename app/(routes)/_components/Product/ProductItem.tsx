@@ -1,3 +1,4 @@
+'use client'
 import { ProductType } from '@/constans'
 import React from 'react'
 import {
@@ -10,6 +11,8 @@ import {
 } from "@/components/ui/card"
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import ProductModal from './ProductModal'
+import { useToast } from '@/components/ui/use-toast'
 
 
 
@@ -19,6 +22,18 @@ interface ProductItemProps {
 }
 
 const ProductItem = ({ product }: ProductItemProps) => {
+
+    const {toast} = useToast()
+
+    const handleClick = () => {
+        toast({
+            title: `${product.title} add to card`,
+            description: "Thank you for shopping",
+            variant:'success'
+          })
+        
+    }
+
     return (
         <Card>
             <CardHeader>
@@ -34,8 +49,8 @@ const ProductItem = ({ product }: ProductItemProps) => {
                 </div>
             </CardContent>
             <CardFooter className='flex justify-between'>
-               <Button variant="destructive">Detail</Button>
-               <Button variant="default">Add to Cart</Button>
+                <ProductModal product={product}/>
+               <Button onClick={handleClick} variant="default">Add to Cart</Button>
             </CardFooter>
         </Card>
 
