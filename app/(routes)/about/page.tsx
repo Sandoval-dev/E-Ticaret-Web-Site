@@ -8,7 +8,7 @@ async function getData(): Promise<Payment[]> {
     {
       id: "728ed52f",
       amount: 100,
-      product:"veri var",
+      product: "veri var",
       status: "pending",
       email: "m@example.com",
     },
@@ -22,12 +22,27 @@ async function getData(): Promise<Payment[]> {
   ]
 }
 
-const  AboutPage = async() => {
+const AboutPage = async () => {
   const data = await getData()
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    author: "osmanerdemkilic",
+    isPublished: true,
+    tags: ["web development", "nextjs", "mobile development", "shopify development"]
+  }
   return (
-    <div className="container mx-auto py-10 border mt-10 rounded-xl dark:border-slate-600">
-      <DataTable columns={columns} data={data} />
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <div className="container mx-auto py-10 border mt-10 rounded-xl dark:border-slate-600">
+        <DataTable columns={columns} data={data} />
+      </div>
+    </>
   )
 }
 
